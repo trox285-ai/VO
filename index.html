@@ -1,0 +1,192 @@
+# كود قاموس الكلمات العربية
+
+انسخ الكود التالي بالكامل وضعه في ملف جديد باسم `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قاموس الكلمات العربية</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+
+        const Search = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        );
+
+        const BookOpen = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+
+        const AlertCircle = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        );
+
+        const ArabicDictionary = () => {
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedEntry, setSelectedEntry] = useState(null);
+
+            const dictionaryData = useMemo(() => ({
+                'رون': 'الرَّون: أَقْصَى المَشارَةِ.',
+                'ربع': 'الارْتِباعُ: العَدْوُ الشَّدِيد.',
+                'رفف': 'الرِّفافَةُ: الَّتِي تُجْعَلُ في أَسْفَلِ البَيْضَةِ.',
+                'ردد': 'الرَّاذَّةُ: خَشَبَةٌ تَعَرَّضُ بين النَّبْعَيْن مُقَدَّمَ العَجَلة.',
+                'رتب': 'الرَّتْبُ، والشِّبْرُ، والرَّصَصُ، والفِتْرُ، قالَها أَبو عَمْرٍ الشَّيْبَانيُّ في ذِكْر ما بَيْنَ الأَصابع، ولم يُفَسِّر الرَّصصَ. والرَّتَبُ: الانْصِبابُ، وقد أَرْتَبَ.',
+                'رصب': 'الرَّصْبُ: ما بَينَ السَّبّابةِ والوْسْطَى.',
+                'ردأ': 'أرْدَأْتُه: سَكَّنْتُه. وأَرْدَأْتُه: أَقْرَرْتُه.',
+                'رشى': 'إذا كانَ مُطِيعاً له، تابعاً لمَسَرَّتِه.',
+                'رشو': 'وأَرْشَوْا فيه بِسلاحَهُم: أَشْرعُوه فيه. والمُراشاةُ: المُصانَعَةُ والخِداعُ. وأَرْشَى في دَمِه رجِالٌ كَثِيرٌ: إذا شَرِكُوا في دَمِه. وأَرْشَوا في المالِ: إذا أخَذُوه.',
+                'رمك': 'رَمَكَ الرَّجلُ: إذا هُزِلَ وذَهَب ما فِي يَدَيْه وهذه دابَّةٌ رامِكَةٌ، وقد رمَكَتْ تَرْمُك رُمُوكاً.',
+                'رثأ': 'الرَّثْأَةُ: وجَعُ يأَخُذُ البَعِيرَ في مَنْكِبه، فَيَظْلَعُ منه، يقال: قد رَثَأَ البَعِيرُ يَرْثَأُ. ورَثَأَهُ بالعَصا رَثْأً شديداً: ضَرَبَه بها.',
+                'رمث': 'أَرْمَثَ على المِئَةِ: زَادَ عَلَيها. والرَّمَثُ: عِلاَقَةُ السِّقاءِ، يُرْبَطُ في طَرَفِ السِّقاءِ، ثم يُرْبَطُ إلى طَريقَةِ البَيْتِ ليُمْخَضَ.',
+                'ريش': 'رَيَّشَتِ المَرْأًةُ هَوْدَجَها، وذلك أن تْلْطِفَ وتُحَسِّنَ أَسْرَه.',
+                'رجل': 'الرُّجْلُ: الرُّجْلَةُ مصدرُ الَّراجِلِ، يُقال: لقد طالَ رٌجْلُه: [إذا لم يَكُنْ له دَابّة]، وحَمَلَك الله من الرُّجْلِ. وَرَجَلَها: نَكَحَهَا.',
+                'رمز': 'هذه إبلٌ رُمْزٌ أي سُحّاحٌ سِمانٌ. وهذه ناقَةٌ تَرْمُزُ، وهي التي لا تَكادُ تَمْشِي من ثِقَلِها وسِمَنِها.',
+                'رأب': 'رَأَبَتِ الأَرضُ [بعدَك، وذلك إذا أَكَلتَ نَصِيّها ثم شَبّ بعد ذلك]، وهو مثلُ الرَّطْبَة إذا جُزَّتْ، ثم نَبَتَتْ. قيلَ: رَأَبَتْ، تَرْأَبَ، رَأَباً. والرَّأَبُ: سَبْعُونَ من الإِبل، يُقال: رَأَبٌ، ورَأْبان، وأَرْءَابٌ.',
+                'رسن': 'الأَرْسانُ من الأَرْض: الحَزْنَةُ التي ليسَ بها جَنْدَلٌ.',
+                'رمل': 'ارْتَمَلَتْ فُلاَنَةُ على بَنِيها: إذا أَقامَت عليهم وقَدْ ماتَ زَوْجُها.',
+                'رهط': 'الرِّهاطُ: مَتاعُ البَيْتِ: الطَّنافِسُ، والأَنْماطُ، والوَسائِدُ، والبُسُط، والفُرُش.',
+                'ريم': 'أَقِمْ رَيْمَ بَعِيرِك، أَي مَيْلَه.',
+                'رحض': 'ارْتَحَض فُلانُ أي افْتَضَح. وأَصْبَحَ فُلانٌ رَحِيضاً في قَوْمِه.',
+                'رقش': 'ارْتَقَشُوا: اخْتَلَطُوا في القِتالِ والسِّباب.',
+                'ربى': 'الإِربِيان: بَقْلَةٌ من ذُكورِ البَقْل، قال صالِحٌ: مع السَّعْدان نَبْتَ الإِربيانِ.',
+                'رعف': 'الرَّعِيفُ يَكُونُ في مُقَدّم السَّحابَة.',
+                'رأد': 'الرِّئْدُ: الضِّيقُ.',
+                'رمم': 'الرَّمِيمُ: الصَّبَا من الرِّياحِ.',
+                'رخش': 'ارْتَخَسَ: اضطَّربَ.',
+                'رسم': 'الرّوْسمُ العَيْنان.',
+                'ردح': 'الرّداحةُ البَيْتُ الذي يُبْنَى للضَّبُع.',
+                'رفض': 'رَفَض فُوه يَرْفِضُ: إّذا اتَّغَرَ.',
+                'رقص': 'أَرْضٌ رقَّاصَةٌ: لا تُنْبتُ شَيئاً، أَصابَها المَطَر [وكَثُر العُشْبُ في غيرها].',
+                'رسغ': 'المُرْسِغُ: المُخصِبُ الذي يُوَسِّعُ على عِيِالِهِ في النَّفَقة.',
+                'رجد': 'الرَّجّاد: الذي يَنْقُل السُّنْبُلَ إلى البَيْدَر، يُقال: رَجَدَ يَرْجُدُ رِجاداً.',
+                'ردن': 'الرَّدْنُ: التَّدخِين.',
+                'رنع': 'التَّرنِيعُ: تَحْريكُ الرَّأْسِ.',
+                'رتم': 'رَتَّمَ الضَّرْعُ أوَّلَ ما يَخْرُجُ.',
+                'رضرض': 'الرَّضْراضْ: القَطْرُ من المَطَر الصِّغارُ.',
+                'ردم': 'المِرْدامُ: القَلِيلُ الخَيرْ.',
+                'رقق': 'الرَّقِيقان: ما بين الخاصِرَة والرُّفْعِ.',
+                'ربح': 'أَرْبَحَ النَّاقَةَ: حَلَبَها غُدْوَةً ونصفَ النَّهار، يُقال أَشْلِ لا تُرْبِحْ، أي أَبْقِ لا تَعصِرْ.'
+            }), []);
+
+            const searchResults = useMemo(() => {
+                if (!searchTerm.trim()) return [];
+                
+                const term = searchTerm.trim();
+                return Object.keys(dictionaryData)
+                    .filter(word => word.includes(term))
+                    .map(word => ({ word, meaning: dictionaryData[word] }));
+            }, [searchTerm, dictionaryData]);
+
+            const handleSearch = (word) => {
+                setSelectedEntry({ word, meaning: dictionaryData[word] });
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-8">
+                            <div className="flex items-center justify-center gap-3 mb-3">
+                                <BookOpen className="w-10 h-10 text-amber-700" />
+                                <h1 className="text-4xl font-bold text-amber-900">قاموس الكلمات العربية</h1>
+                            </div>
+                            <p className="text-amber-700">ابحث عن معاني الكلمات من الجذور العربية</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+                            <div className="relative">
+                                <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-amber-600 w-5 h-5" />
+                                <input
+                                    type="text"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    placeholder="ابحث عن كلمة (مثال: رون، رشو، رمك...)"
+                                    className="w-full pr-12 pl-4 py-3 border-2 border-amber-200 rounded-lg focus:border-amber-500 focus:outline-none text-lg"
+                                />
+                            </div>
+                        </div>
+
+                        {searchTerm && searchResults.length > 0 && (
+                            <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+                                <h2 className="text-xl font-bold text-amber-900 mb-4">النتائج المطابقة ({searchResults.length})</h2>
+                                <div className="grid gap-3">
+                                    {searchResults.map((result, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => handleSearch(result.word)}
+                                            className="text-right p-4 bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors border border-amber-200"
+                                        >
+                                            <span className="text-xl font-bold text-amber-900">{result.word}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {selectedEntry && (
+                            <div className="bg-white rounded-xl shadow-lg p-6">
+                                <div className="border-r-4 border-amber-500 pr-4">
+                                    <h3 className="text-2xl font-bold text-amber-900 mb-4">
+                                        {selectedEntry.word}
+                                    </h3>
+                                    <p className="text-lg text-gray-800 leading-relaxed">
+                                        {selectedEntry.meaning}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+
+                        {searchTerm && searchResults.length === 0 && (
+                            <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+                                <AlertCircle className="w-16 h-16 text-amber-400 mx-auto mb-4" />
+                                <h3 className="text-xl font-bold text-amber-900 mb-2">لم يتم العثور على نتائج</h3>
+                                <p className="text-gray-600">الكلمة "{searchTerm}" غير موجودة في القاموس</p>
+                            </div>
+                        )}
+
+                        {!searchTerm && !selectedEntry && (
+                            <div className="bg-white rounded-xl shadow-lg p-6">
+                                <h3 className="text-xl font-bold text-amber-900 mb-4">كيفية الاستخدام</h3>
+                                <ul className="space-y-2 text-gray-700">
+                                    <li>• اكتب الكلمة التي تريد البحث عنها في المربع أعلاه</li>
+                                    <li>• يحتوي القاموس على {Object.keys(dictionaryData).length} كلمة</li>
+                                    <li>• يمكنك البحث بجزء من الكلمة لرؤية جميع الكلمات المطابقة</li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<ArabicDictionary />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+```
+
